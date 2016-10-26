@@ -23,4 +23,4 @@ download_target_location = "YOUR_DOWNLOAD_TARGET_LOCATION_GOES_HERE"
 
 
 response = get_ngrams_from_grant_number('7546750', api_key)
-download_csv_from_response()
+download_csv_from_response(response,download_target_location)
