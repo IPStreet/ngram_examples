@@ -59,7 +59,7 @@ def download_csv_from_response(response,download_target_location):
 
 if __name__ == "__main__":
 
-    api_key = "YOUR-API-KEY"
+    api_key = "YOUR_API_KEY_GOES_HERE"
 
     ngram_response = get_ngrams_from_grant_number('7546750', api_key)
     print(ngram_response)
