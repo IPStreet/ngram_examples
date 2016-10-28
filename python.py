@@ -66,8 +66,8 @@ if __name__ == "__main__":
     keyphrase_response = get_keyphrases_from_grant_number('7546750', api_key)
     print(keyphrase_response)
 
-    ngram_download_target_location = 'C:/Users/reedj_000/Desktop/Schwegment/output/ngram-'
-    keyphrase_download_target_location = 'C:/Users/reedj_000/Desktop/Schwegment/output/keyphrase-'
+    ngram_download_target_location = 'WHERE_YOU_WANT_YOUR_NGRAM_RESULTS_TO_BE_STORED'
+    keyphrase_download_target_location = 'WHERE_YOU_WANT_YOUR_KEYPHRASE_RESULTS_TO_BE_STORED'
 
     download_csv_from_response(ngram_response,ngram_download_target_location)
     download_csv_from_response(keyphrase_response, keyphrase_download_target_location)
