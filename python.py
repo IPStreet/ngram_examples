@@ -44,7 +44,7 @@ def download_csv_from_response(response,download_target_location):
     :param download_target_location: where you want the csv file to be downloaded to
     :return: void
     """
-    csv_location = response['csv']
+    csv_location = response['csv_link']
     patent_unique_id = response['application_number']
     target_file_name = download_target_location + patent_unique_id + '.csv'
 
