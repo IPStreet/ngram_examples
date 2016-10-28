@@ -25,13 +25,13 @@ get_keyphrases_from_grant_number <- function(grant_number, api_key){
 
 download_csv_from_response <- function(response, download_target_location){
   csv_location = response$csv
-  download.file(url=csv_location, destfile=download_target_location, method='curl')
+  download.file(url=csv_location, destfile=download_target_location, method='auto')
 }
 
 #configuartion parameters
-api_key = "YOUR_API_KEY_GOES_HERE"
-ngram_download_target_location = "C:/Users/reedj_000/Desktop/Schwegment/output/ngram-"
-keyphrase_download_target_location = "C:/Users/reedj_000/Desktop/Schwegment/output/keyphrase-"
+api_key = "5AsaMTe6HUypUlAqv3Rw3E6Pvjo4dYL64Rr2z2va"
+ngram_download_target_location = 'WHERE_YOU_WANT_YOUR_NGRAM_RESULTS_TO_BE_STORED'
+keyphrase_download_target_location = 'WHERE_YOU_WANT_YOUR_KEYPHRASE_RESULTS_TO_BE_STORED'
 
 
 #send a ngram request
