@@ -36,6 +36,23 @@ def get_keyphrases_from_grant_number(grant_number, api_key):
 
     return response
 
+def get_claim_elements_from_grant_number(grant_number, api_key):
+    """
+
+    :param grant_number: a patent grant number
+    :param api_key: client api key
+    :return: keyphrases json object
+    """
+    endpoint = 'https://api.ipstreet.com/v2/claim_parser/claim_element'
+    headers = {'x-api-key': api_key}
+    payload = json.dumps({'q': {'grant_number': grant_number}})
+    r = requests.post(endpoint, headers=headers, data=payload)
+
+    response = r.json()
+
+    return response
+
+
 
 def download_csv_from_response(response,download_target_location):
     """
@@ -59,12 +76,14 @@ def download_csv_from_response(response,download_target_location):
 
 if __name__ == "__main__":
 
-    api_key = "YOUR_API_KEY_GOES_HERE"
+    api_key = "5AsaMTe6HUypUlAqv3Rw3E6Pvjo4dYL64Rr2z2va"
 
     ngram_response = get_ngrams_from_grant_number('7546750', api_key)
     print(ngram_response)
     keyphrase_response = get_keyphrases_from_grant_number('7546750', api_key)
     print(keyphrase_response)
+    claim_elements = get_claim_elements_from_grant_number('7546750', api_key)
+    print(claim_elements)
 
     ngram_download_target_location = 'WHERE_YOU_WANT_YOUR_NGRAM_RESULTS_TO_BE_STORED'
     keyphrase_download_target_location = 'WHERE_YOU_WANT_YOUR_KEYPHRASE_RESULTS_TO_BE_STORED'
