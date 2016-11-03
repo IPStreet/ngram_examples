@@ -76,7 +76,7 @@ def download_csv_from_response(response,download_target_location):
 
 if __name__ == "__main__":
 
-    api_key = "5AsaMTe6HUypUlAqv3Rw3E6Pvjo4dYL64Rr2z2va"
+    api_key = "YOUR_API_KEY_GOES_HERE"
 
     ngram_response = get_ngrams_from_grant_number('7546750', api_key)
     print(ngram_response)
@@ -87,6 +87,8 @@ if __name__ == "__main__":
 
     ngram_download_target_location = 'WHERE_YOU_WANT_YOUR_NGRAM_RESULTS_TO_BE_STORED'
     keyphrase_download_target_location = 'WHERE_YOU_WANT_YOUR_KEYPHRASE_RESULTS_TO_BE_STORED'
+    claim_elements_download_target_location = 'WHERE_YOU_WANT_YOUR_KEYPHRASE_RESULTS_TO_BE_STORED'
 
     download_csv_from_response(ngram_response,ngram_download_target_location)
     download_csv_from_response(keyphrase_response, keyphrase_download_target_location)
+    download_csv_from_response(claim_elements, claim_elements_download_target_location)
