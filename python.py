@@ -1,3 +1,4 @@
+import csv
 import json
 import shutil
 
@@ -72,23 +73,57 @@ def download_csv_from_response(response,download_target_location):
         shutil.copyfileobj(response.raw, out_file)
     del response
 
+def get_list_of_unique_ids_from_csv(csv_file):
+    """
+
+    :param csv_file: a csv file with patent unique ids in the first column
+    :return: a list of patent unique id numbers
+    """
+
+    pat_nums = []
+    with open(patent_list_location, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            try:
+                pat_nums.append(row[0])
+            except:
+                pass
+
+    return pat_nums
 
 
 if __name__ == "__main__":
 
     api_key = "YOUR_API_KEY_GOES_HERE"
 
-    ngram_response = get_ngrams_from_grant_number('7546750', api_key)
-    print(ngram_response)
-    keyphrase_response = get_keyphrases_from_grant_number('7546750', api_key)
-    print(keyphrase_response)
-    claim_elements = get_claim_elements_from_grant_number('7546750', api_key)
-    print(claim_elements)
-
     ngram_download_target_location = 'WHERE_YOU_WANT_YOUR_NGRAM_RESULTS_TO_BE_STORED'
     keyphrase_download_target_location = 'WHERE_YOU_WANT_YOUR_KEYPHRASE_RESULTS_TO_BE_STORED'
     claim_elements_download_target_location = 'WHERE_YOU_WANT_YOUR_KEYPHRASE_RESULTS_TO_BE_STORED'
 
-    download_csv_from_response(ngram_response,ngram_download_target_location)
-    download_csv_from_response(keyphrase_response, keyphrase_download_target_location)
-    download_csv_from_response(claim_elements, claim_elements_download_target_location)
+    patent_list_location = 'LOCATION_OF_A_CSV_FILE_WITH_GRANT_NUMBERS_IN_FIRST_COLUMN'
+
+    target_patents = get_list_of_unique_ids_from_csv(patent_list_location)
+
+
+    for num in target_patents:
+
+        try:
+            ngram_response = get_ngrams_from_grant_number(num, api_key)
+            download_csv_from_response(ngram_response, ngram_download_target_location)
+            print("Success: N-Grams found in asset " + num + " successfully downloaded")
+        except:
+            print("Error " + num)
+
+        try:
+            keyphrase_response = get_keyphrases_from_grant_number(num, api_key)
+            download_csv_from_response(keyphrase_response, keyphrase_download_target_location)
+            print("Success: Key Phrases found in assets " + num + " successfully downloaded")
+        except:
+            print("Error " + num)
+
+        try:
+            claim_elements = get_claim_elements_from_grant_number(num, api_key)
+            download_csv_from_response(claim_elements, claim_elements_download_target_location)
+            print("Success: Claim Elements found in asset " + num + " successfully downloaded")
+        except:
+            print("Error " + num)
